@@ -1,8 +1,0 @@
-name: FastCrystals-OG
-version: 1.0
-api-version: 1.18
-main: xyz.exyron.fastcrystals.FastCrystalsPlugin
-authors: [ Exyron.XYZ, KamlaX, KinczeK, NotAlexNoyle ]
-commands:
-  fastcrystals:
-    aliases: [ fastcrystal ]
