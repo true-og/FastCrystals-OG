@@ -8,6 +8,7 @@ version '1.0'
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
+	vendor = JvmVendorSpec.GRAAL_VM
     }
 }
 
