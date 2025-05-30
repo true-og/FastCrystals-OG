@@ -1,11 +1,12 @@
 plugins {
     id 'java'
-	id 'eclipse'
+    id 'eclipse'
 }
 
-group 'xyz.exyron.fastcrystals'
-version '1.0.1'
+group   = 'xyz.exyron.fastcrystals'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
 }
+
