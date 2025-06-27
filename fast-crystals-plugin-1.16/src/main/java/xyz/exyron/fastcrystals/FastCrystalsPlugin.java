@@ -7,9 +7,9 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.md_5.bungee.api.ChatColor;
-import net.minecraft.network.protocol.game.PacketPlayOutEntityDestroy;
+import net.minecraft.server.v1_16_R3.PacketPlayOutEntityDestroy;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,10 +28,10 @@ public final class FastCrystalsPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
+        this.saveDefaultConfig();
 
-        String enableMessage = colorize(Objects.requireNonNull(this.getConfig().getString("enableMessage")));
-        String disableMessage = colorize(Objects.requireNonNull(this.getConfig().getString("disableMessage")));
+        String enableMessage = colorize(Objects.requireNonNull(configuration.getString("enableMessage")));
+        String disableMessage = colorize(Objects.requireNonNull(configuration.getString("disableMessage")));
 
         Objects.requireNonNull(getCommand("fastcrystals")).setExecutor(((sender, command, label, args) -> {
             if (sender instanceof Player player) {
@@ -46,7 +46,7 @@ public final class FastCrystalsPlugin extends JavaPlugin implements Listener {
             return false;
         }));
 
-        getServer().getPluginManager().registerEvents(this, this);
+        this.getServer().getPluginManager().registerEvents(this, this);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -56,8 +56,8 @@ public final class FastCrystalsPlugin extends JavaPlugin implements Listener {
                 && this.playersUUID.contains(player.getUniqueId())) {
             ((CraftPlayer) player)
                     .getHandle()
-                    .b
-                    .a(new PacketPlayOutEntityDestroy(event.getEntity().getEntityId()));
+                    .playerConnection
+                    .sendPacket(new PacketPlayOutEntityDestroy(event.getEntity().getEntityId()));
         }
     }
 
